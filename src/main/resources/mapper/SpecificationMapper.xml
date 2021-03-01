@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.mapper.SpecificationMapper">
+	<resultMap type="specification" id="specificationMap">
+		<id column="id" property="id"/>
+		<result column="spe_name" property="speName"/>
+	</resultMap>
+	<select id="listSpecifications" resultMap="specificationMap">
+		select * from specification 
+		<where>
+			<if test="name != null and name != ''">
+				spe_name like concat('%',#{name},'%')
+			</if>
+		</where>
+	</select>
+	<select id="getSpecificationById" resultMap="specificationMap">
+		select * from specification where id = #{id}
+	</select>
+	<update id="updateSpecification" parameterType="specification">
+		update specification set spe_name = #{speName} where id = #{id}
+	</update>
+	<insert id="saveSpecification">
+		insert into specification(spe_name) values(#{name})
+	</insert>
+	<delete id="deleteSpecificationById">
+		delete from specification where id = #{id}
+	</delete>
+</mapper>

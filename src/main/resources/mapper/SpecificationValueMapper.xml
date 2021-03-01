@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.mapper.SpecificationValueMapper">
+	<resultMap type="specificationValue" id="specificationValueMap">
+		<id column="id" property="id"/>
+		<result column="spe_id" property="speId"/>
+		<result column="value" property="value"/>
+		<result column="serial" property="serial"/>
+	</resultMap>
+	<select id="listSpecificationValuesBySpeId" resultMap="specificationValueMap">
+		select * from specification_value where spe_id = #{speId} order by serial
+	</select>
+	<select id="getSpecificationValueById" resultMap="specificationValueMap">
+		select * from specification_value where id = #{id}
+	</select>
+	<insert id="saveSpecificationValue" parameterType="specificationValue">
+		insert into specification_value(spe_id,value,serial) values(#{speId},#{value},#{serial}) 
+	</insert>
+	<update id="updateSpecificationValue" parameterType="specificationValue">
+		update specification_value
+		<set>
+			<if test="value != null and value != ''">
+				value = #{value},
+			</if>
+			<if test="serial != null">
+				serial = #{serial}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<delete id="deleteSpecificationValueById" parameterType="int">
+		delete from specification_value where id = #{id}
+	</delete>
+	<delete id="deleteSpecificationValueBySpeId" parameterType="int">
+		delete from specification_value where spe_id = #{speId}
+	</delete>
+</mapper>

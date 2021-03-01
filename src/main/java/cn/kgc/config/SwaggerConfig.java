@@ -21,7 +21,7 @@ public class SwaggerConfig {
 	 */
 	public ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("ECM商品管理系统")
-				.contact(new Contact("孙福祥", "#", "1873540041@qq.com")).version("1.0")
+				.contact(new Contact("孙福祥", "#", "1873540041@qq.com")).version("1.1")
 				.description("测试后台返回的收据").build();
 	}
 	@Bean
